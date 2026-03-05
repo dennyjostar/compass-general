@@ -472,6 +472,48 @@
             display: block;
         }
 
+        /* TTS 듣기 버튼 */
+        .tts-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 10px;
+            margin-right: 8px;
+            padding: 6px 14px;
+            background: rgba(201, 168, 76, 0.08);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 20px;
+            color: #c9a84c;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tts-btn:hover {
+            background: rgba(201, 168, 76, 0.15);
+        }
+
+        .tts-btn.playing {
+            background: rgba(201, 168, 76, 0.25);
+            border-color: rgba(201, 168, 76, 0.5);
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(201, 168, 76, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+            }
+        }
+
         /* 모달 입력 */
         .modal-input-area {
             padding: 12px 16px 24px;
@@ -960,8 +1002,8 @@
             </div>
             <div class="feature-card" onclick="openHymnModal()">
                 <div class="card-icon">🎵</div>
-                <div class="card-title">목사님 찬양</div>
-                <div class="card-desc">목사님의 찬양을 들어보세요</div>
+                <div class="card-title">찬양 듣기</div>
+                <div class="card-desc">은혜로운 찬양을 들어보세요</div>
             </div>
         </div>
 
@@ -1012,7 +1054,7 @@
     <div class="hymn-overlay" id="hymnModal">
         <div class="hymn-modal">
             <div class="modal-header">
-                <div class="modal-title">🎵 목사님 찬양</div>
+                <div class="modal-title">🎵 찬양 듣기</div>
                 <div class="modal-close" onclick="closeHymnModal()">✕</div>
             </div>
             <div class="hymn-list" id="hymnList">
@@ -1030,7 +1072,7 @@
     <div class="side-menu" id="sideMenu">
         <div class="side-menu-header">
             <div class="menu-title">나침반</div>
-            <div class="menu-sub">교회 AI 영적 상담</div>
+            <div class="menu-sub">모두를 위한 영적 상담</div>
         </div>
         <div class="menu-item" onclick="openProfileModal()">
             <span class="menu-icon">👤</span>
@@ -1105,7 +1147,7 @@
     <div class="onboarding-overlay" id="onboardingOverlay">
         <div class="onboarding-card">
             <h2>✝️ 나침반</h2>
-            <p>김성수 목사님의 말씀이 여기, 계속됩니다</p>
+            <p>모두를 위한 영적 여정, 여기서 시작합니다</p>
             <label>이름(닉네임)</label>
             <input type="text" id="onboardName" placeholder="이름을 입력해주세요">
             <label>연령대</label>
@@ -1136,9 +1178,9 @@
             <h3>📢 공지사항</h3>
             <div style="margin-bottom:20px;">
                 <p style="color:#c9a84c; font-weight:600; margin-bottom:8px;">[2025.02] 나침반 서비스 오픈</p>
-                <p>김성수 목사님의 말씀을 기반으로 한 AI 영적 상담 서비스 '나침반'이 오픈되었습니다.</p>
+                <p>보편적인 기독교 지식을 기반으로 한 AI 영적 상담 서비스 '나침반'이 오픈되었습니다.</p>
                 <p style="margin-top:12px; color:#c9a84c; font-weight:600; margin-bottom:8px;">[안내] 베타 서비스 운영 중</p>
-                <p>현재 베타 서비스로 운영 중이며, 지속적으로 개선하고 있습니다. 이용 중 불편사항은 문의하기를 통해 알려주세요.</p>
+                <p>현재 베타 서비스로 운영 중이며, 더 나은 상담 경험을 위해 지속적으로 개선하고 있습니다.</p>
             </div>
             <button class="close-info" onclick="closeNoticePopup(false)">닫기</button>
             <div style="margin-top:12px; text-align:center;">
@@ -1400,9 +1442,9 @@
             var html = '';
             if (type === 'guide') {
                 html = '<h3>📋 이용 안내</h3>' +
-                    '<p><strong>나침반</strong>은 김성수 목사님의 말씀을 기반으로 한 AI 영적 상담 서비스입니다.</p>' +
+                    '<p><strong>나침반</strong>은 보편적인 기독교 가르침을 바탕으로 한 AI 영적 상담 서비스입니다.</p>' +
                     '<p><strong>주요 기능</strong></p>' +
-                    '<p>• 말씀 찾기: 성경 구절과 설교 내용 검색<br>• 기도문: 상황에 맞는 기도문 생성<br>• 오늘의 묵상: 매일 새로운 묵상 가이드<br>• 목사님 찬양: 찬양 듣기</p>' +
+                    '<p>• 말씀 찾기: 성경 구절과 신앙 지식 검색<br>• 기도문: 상황에 맞는 기도문 생성<br>• 오늘의 묵상: 매일 새로운 묵상 가이드<br>• 찬양 듣기: 은혜로운 찬양 모음(준비 중)</p>' +
                     '<p><strong>안내 사항</strong></p>' +
                     '<p>• 모든 대화는 기기 내 암호화 저장됩니다<br>• AI가 생성하는 답변이므로 참고용으로 활용해주세요<br>• 심각한 위기 상황 시 전문 상담을 이용해주세요<br>&nbsp;&nbsp;- 자살예방상담 1393<br>&nbsp;&nbsp;- 정신건강위기상담 1577-0199</p>' +
                     '<button class="close-info" onclick="closeInfoModal()">닫기</button>';
@@ -1470,7 +1512,7 @@
             document.getElementById('chatModal').classList.add('active');
 
             var prompt = '오늘의 말씀은 ' + verseRef + ' ' + verseText + ' 입니다. ' +
-                '이 말씀을 바탕으로 김성수 목사님의 따뜻한 시선으로 묵상을 이끌어주세요. ' +
+                '이 말씀을 바탕으로 따뜻하고 지혜로운 영적 가이드의 시선으로 묵상을 이끌어주세요. ' +
                 '말씀의 의미, 오늘 하루에 적용할 수 있는 실천 방안, 그리고 짧은 기도문을 포함해주세요.';
 
             sendToAI(prompt, true);
@@ -1538,8 +1580,9 @@
         /* ── 찬양 모달 ── */
         function openHymnModal() {
             if (!requireProfile(function () { openHymnModal(); })) return;
-            document.getElementById('hymnModal').classList.add('active');
-            loadHymns();
+            alert('현재 일반 성도님들을 위한 새로운 찬양 목록을 준비 중입니다. 잠시만 기다려주세요!');
+            // document.getElementById('hymnModal').classList.add('active');
+            // loadHymns();
         }
         function closeHymnModal() {
             document.getElementById('hymnModal').classList.remove('active');
@@ -1553,9 +1596,14 @@
             fetch('/api/hymns')
                 .then(function (r) { return r.json(); })
                 .then(function (data) {
+                    if (data.error) {
+                        list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,100,100,0.7);font-size:12px;">' +
+                            data.error + '<br><span style="opacity:0.5;font-size:10px;">' + (data.details || '') + '</span></div>';
+                        return;
+                    }
                     var files = data.files || data.hymns || [];
                     if (files.length === 0) {
-                        list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.3);">찬양이 없습니다</div>';
+                        list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.3);">찬양이 없습니다 (v1.0.3)</div>';
                         return;
                     }
                     var html = '';
@@ -1567,8 +1615,8 @@
                     });
                     list.innerHTML = html;
                 })
-                .catch(function () {
-                    list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.3);">불러오기 실패</div>';
+                .catch(function (err) {
+                    list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.3);">서버 연결 실패<br><span style="font-size:10px;opacity:0.5;">' + err + '</span></div>';
                 });
         }
 
@@ -1701,15 +1749,96 @@
             var div = document.createElement('div');
             div.className = 'message ai';
             var html = '<span class="ai-label">✝️ 나침반</span>';
-            html += '<div>' + parsed.main.replace(/\n/g, '<br>') + '</div>';
+            html += '<div class="ai-text">' + parsed.main.replace(/\n/g, '<br>') + '</div>';
+
+            // TTS 및 심층 분석 버튼 컨테이너
+            html += '<div class="ai-actions" style="display: flex; flex-wrap: wrap;">';
+
+            // 최종 가이드 목소리 듣기 버튼 (V8-FINAL)
+            var msgId = 'msg_' + Date.now();
+            html += '<div class="tts-btn" id="btn_' + msgId + '" style="background: #27ae60; color: white; border-color: #219150;" onclick="run_voice_v7(\'' + msgId + '\')">🔊 가이드 목소리 (V8-FINAL)</div>';
+
             if (parsed.deep && parsed.deep.length > 0) {
-                var id = 'deep_' + Date.now();
-                html += '<div class="deep-btn" onclick="toggleDeep(\'' + id + '\')">📖 심층 분석 보기</div>';
-                html += '<div class="deep-content" id="' + id + '">' + parsed.deep.replace(/\n/g, '<br>') + '</div>';
+                var deepId = 'deep_' + msgId;
+                html += '<div class="deep-btn" onclick="toggleDeep(\'' + deepId + '\')">📖 심층 분석 보기</div>';
+                html += '</div>'; // ai-actions close
+                html += '<div class="deep-content" id="' + deepId + '">' + parsed.deep.replace(/\n/g, '<br>') + '</div>';
+            } else {
+                html += '</div>'; // ai-actions close
             }
+
             div.innerHTML = html;
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
+        }
+
+        /* ── TTS (음성 출력) ── */
+        var currentUtterance = null;
+        var currentPlayingBtn = null;
+
+        // 2026-02-21 V7 최종: 함수명 변경으로 캐시 돌파
+        function run_voice_v7(msgId) {
+            var btn = document.getElementById('btn_' + msgId);
+            var rawText = btn.parentElement.parentElement.querySelector('.ai-text').innerText;
+
+            // [1] 극한의 텍스트 정제 (V6: 한글, 영어, 숫자 외 싹 제거)
+            var cleanText = rawText
+                .split('#').join(' ')  // # 강제 삭제 1
+                .split('*').join(' ')  // * 강제 삭제
+                .replace(/[^가-힣a-zA-Z0-9\s?.!,]/g, ' ') // 잡다한 기호 싹 삭제
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            if (window.speechSynthesis.speaking && currentPlayingBtn === btn) {
+                window.speechSynthesis.cancel();
+                resetTTSBtn();
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+            if (currentPlayingBtn) resetTTSBtn();
+
+            var utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = 'ko-KR';
+            utterance.rate = 0.9;
+            utterance.pitch = 0.45; // 너무 낮지 않은 묵직한 중저음
+
+            var voices = window.speechSynthesis.getVoices();
+            var maleVoice = voices.find(v => v.lang.includes('ko') && (v.name.includes('InJoon') || v.name.includes('Minho') || v.name.includes('Male'))) ||
+                voices.find(v => v.lang.includes('ko') && v.name.includes('Google')) ||
+                voices.find(v => v.lang.includes('ko'));
+
+            if (maleVoice) utterance.voice = maleVoice;
+
+            utterance.onstart = function () {
+                btn.classList.add('playing');
+                btn.innerHTML = '⏹️ 읽기 중단';
+                currentPlayingBtn = btn;
+            };
+
+            utterance.onend = function () {
+                resetTTSBtn();
+            };
+
+            utterance.onerror = function () {
+                resetTTSBtn();
+            };
+
+            currentUtterance = utterance;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // 보이스 리스트 로딩 지원
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); };
+        }
+
+        function resetTTSBtn() {
+            if (currentPlayingBtn) {
+                currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn.innerHTML = '🔊 가이드 목소리 (V8-FINAL)';
+                currentPlayingBtn = null;
+            }
         }
 
         function toggleDeep(id) {
@@ -1724,7 +1853,7 @@
             div.id = 'typingIndicator';
             div.innerHTML = `
                 <div class="typing-content">
-                    <span class="typing-text">목사님께서 기도하며 말씀을 준비하고 계십니다...</span>
+                    <span class="typing-text">따뜻한 위로와 지혜의 말씀을 준비하고 있습니다...</span>
                     <div class="typing-dots">
                         <div class="typing-dot"></div>
                         <div class="typing-dot"></div>
@@ -1795,7 +1924,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             checkOnboarding();
             showDailyVerse();
-            checkNoticePopup();
         });
     </script>
 </body>
