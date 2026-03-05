@@ -119,7 +119,7 @@ def ask():
 # Google Drive 찬양 API (기존 유지)
 import requests as http_requests
 
-print("COMPASS SERVER v1.0.4 - General Mode")
+print("COMPASS SERVER v1.0.5 - General Mode")
 
 DRIVE_API_KEY = os.getenv("DRIVE_API_KEY")
 # AIzaSyBUvx... 는 만료된 키임이 확인됨 -> 강제로 정상 키로 교체
