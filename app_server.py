@@ -117,7 +117,7 @@ def ask():
 
     except Exception as e:
         print(f"[ERROR] {e}")
-print("COMPASS SERVER v1.0.3 - General Mode")
+print("COMPASS SERVER v1.0.4 - General Mode")
 
 DRIVE_API_KEY = os.getenv("DRIVE_API_KEY")
 # AIzaSyBUvx... 는 만료된 키임이 확인됨 -> 강제로 정상 키로 교체
