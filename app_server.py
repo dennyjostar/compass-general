@@ -17,7 +17,6 @@ GENERAL_NOTEBOOK_ID = "b937848d-4238-4883-a4c6-2adf8e2ba71f"
 
 import base64
 
-print("COMPASS SERVER v1.0.2 - General Mode")
 
 # OpenAI 설정
 def get_openai_client():
@@ -117,6 +116,9 @@ def ask():
 
     except Exception as e:
         print(f"[ERROR] {e}")
+# Google Drive 찬양 API (기존 유지)
+import requests as http_requests
+
 print("COMPASS SERVER v1.0.4 - General Mode")
 
 DRIVE_API_KEY = os.getenv("DRIVE_API_KEY")
