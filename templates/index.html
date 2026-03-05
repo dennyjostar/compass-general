@@ -1761,10 +1761,7 @@
 
             // TTS 및 심층 분석 버튼 컨테이너
             html += '<div class="ai-actions" style="display: flex; flex-wrap: wrap;">';
-
-            // 최종 가이드 목소리 듣기 버튼 (V8-FINAL)
             var msgId = 'msg_' + Date.now();
-            html += '<div class="tts-btn" id="btn_' + msgId + '" style="background: #27ae60; color: white; border-color: #219150;" onclick="run_voice_v7(\'' + msgId + '\')">🔊 가이드 목소리 (V8-FINAL)</div>';
 
             if (parsed.deep && parsed.deep.length > 0) {
                 var deepId = 'deep_' + msgId;
