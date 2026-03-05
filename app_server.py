@@ -122,7 +122,7 @@ def ask():
 # Google Drive 찬양 API (기존 유지)
 import requests as http_requests
 
-DRIVE_API_KEY = "AIzaSyBUvxZTwsN60wyC9YZJjidR6VfhWjFazB8"
+DRIVE_API_KEY = "AIzaSyD1oqU-vb33CHNsJ8M13jROdYDgNyKDTNU"
 DRIVE_FOLDER_ID = "1372ozYC2muXXXSjGUSBoKpMHDJd-nmb9"
 
 @app.route('/api/hymns')
