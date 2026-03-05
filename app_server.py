@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, make_response
 import os
 import openai
 from datetime import datetime
 import hashlib
+from dotenv import load_dotenv
+
+# .env 파일 로드
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(env_path)
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "compass-secret-key-2026")
@@ -27,7 +32,11 @@ def get_user_hash(name, age_group="", gender=""):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    resp = make_response(render_template('index.html'))
+    resp.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    resp.headers['Pragma'] = 'no-cache'
+    resp.headers['Expires'] = '0'
+    return resp
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -66,12 +75,20 @@ def ask():
             "상담 지침:\n"
             "1. 사용자의 감정을 먼저 읽고 따뜻한 위로의 말을 건네십시오.\n"
             "2. 관련된 성경 구절을 인용하고 그 의미를 일상에 적용할 수 있게 쉽게 설명하십시오.\n"
-            "3. 정죄나 심판보다는 하나님의 사랑, 은혜, 영적 성장에 초점을 맞추십시오.\n"
-            "4. 답변 마지막에는 짧은 격려의 기도나 오늘 실천할 수 있는 믿음의 행동을 제안하십시오.\n\n"
-            "답변 형식:\n"
-            "[따뜻한 위로] - 사용자의 마음에 공감하는 내용\n"
-            "[성경의 지혜] - 인용 성경 구절 및 풀이\n"
-            "[믿음의 발걸음] - 짧은 기도나 실천 방안\n\n"
+            "3. 답변 마지막에는 짧은 격려의 기도나 오늘 실천할 수 있는 믿음의 행동을 제안하십시오.\n"
+            "4. 신학적이고 깊이 있는 성경적 분석을 포함한 '심층 분석' 섹션을 반드시 제공하십시오.\n\n"
+            "답변 형식 (반드시 아래 태그와 형식을 엄격히 지켜주세요):\n"
+            "[일반 답변 시작]\n"
+            "### [따뜻한 위로]\n"
+            "(사용자의 마음에 공감하는 내용)\n\n"
+            "### [성경의 지혜]\n"
+            "(인용 성경 구절 및 풀이)\n\n"
+            "### [믿음의 발걸음]\n"
+            "(짧은 기도나 실천 방안)\n"
+            "[일반 답변 끝]\n\n"
+            "[심층 분석 시작]\n"
+            "(인간의 연약함, 하나님의 주권, 성경의 심오한 진리 등을 복음주의 관점에서 500자 내외로 깊이 있게 분석)\n"
+            "[심층 분석 끝]\n\n"
             "위기 상황(자해, 자살 언급 등)이 감지되면 반드시 다음을 안내하세요:\n"
             "자살예방상담전화 1393 | 정신건강위기상담전화 1577-0199"
         )
