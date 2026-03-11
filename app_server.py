@@ -22,9 +22,8 @@ import base64
 def get_openai_client():
     key = os.getenv("OPENAI_API_KEY")
     if not key:
-        # 환경변수가 없을 경우 하드코딩된 암호화 키를 임의 복호화해서 사용합니다 (배포편의)
-        enc = "c2stcHJvai1uaUlqckgweXVLMExXc0tydWlIbVVodTd2VDJXd1Zoc01vQnVYWFRRMWl6empEdjk1RWx4eTBJQm9abnJMbTZSNU01OTB1THRKLVQzQmxia0ZKVkg1dDd1anFBRGlTanZpUTlJdTJYaVV1V1FuWloybjFLMHZtUXpmZmU0MEIyTE9LWFZ3V0tCeUJJbV9oX3BoZzN0ZkNheW9fY0E="
-        key = base64.b64decode(enc).decode('utf-8')
+        print("❌ Error: OPENAI_API_KEY가 설정되지 않았습니다.")
+        return None
     return openai.OpenAI(api_key=key)
 
 # 서버 사이드 사용량 추적 (메모리 기반 → 추후 DB 교체)
@@ -95,7 +94,7 @@ def ask():
             "(인간의 연약함, 하나님의 주권, 성경의 심오한 진리 등을 복음주의 관점에서 일반 답변보다 훨씬 더 길고 풍성하게, 1000자 이상으로 아주 상세하고 깊이 있게 분석)\n"
             "[심층 분석 끝]\n\n"
             "위기 상황(자해, 자살 언급 등)이 감지되면 반드시 다음을 안내하세요:\n"
-            "자살예방상담전화 1393 | 정신건강위기상담전화 1577-0199"
+            "자살예방상담전화 109 | 정신건강위기상담전화 1577-0199"
         )
 
         completion = client.chat.completions.create(
@@ -122,9 +121,8 @@ import requests as http_requests
 print("COMPASS SERVER v1.0.5 - General Mode")
 
 DRIVE_API_KEY = os.getenv("DRIVE_API_KEY")
-# AIzaSyBUvx... 는 만료된 키임이 확인됨 -> 강제로 정상 키로 교체
-if not DRIVE_API_KEY or DRIVE_API_KEY.startswith("AIzaSyBUvx"):
-    DRIVE_API_KEY = "AIzaSyD1oqU-vb33CHNsJ8M13jROdYDgNyKDTNU"
+if not DRIVE_API_KEY:
+    print("❌ Error: DRIVE_API_KEY가 설정되지 않았습니다.")
 
 DRIVE_FOLDER_ID = os.getenv("DRIVE_FOLDER_ID", "1372ozYC2muXXXSjGUSBoKpMHDJd-nmb9")
 
